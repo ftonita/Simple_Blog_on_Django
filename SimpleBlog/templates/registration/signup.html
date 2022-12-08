@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+
+<div class="list-group" style="min-width:max-content">
+	<!-- <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="text-align:center; border-width: 10px; border-style: dashed;"> -->
+		<h2>Регистрация</h2>
+		<div class="list-group-item d-flex gap-3 py-3" style="max-width:fit-content; text-align:left; border-width: 3px; border-style:groove;">
+		<form method="post">
+			{% csrf_token %}
+		<p>Имя пользователя:</p>
+		<input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus="" required="" id="id_username">
+		
+		<p class="helptext">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</p>
+		
+		<p>Пароль:</p>
+		<input type="password" name="password1" autocomplete="new-password" required="" id="id_password1">
+		<ul>
+			<li>Пароль не должен быть слишком похож на другую вашу личную информацию.</li>
+			<li>Ваш пароль должен содержать как минимум 8 символов.</li>
+			<li>Пароль не должен быть слишком простым и распространенным.</li>
+			<li>Пароль не может состоять только из цифр.</li>
+		</ul>
+		<p>Подтверждение пароля:</p>
+		<input type="password" name="password2" autocomplete="new-password" required="" id="id_password2">
+		<span class="helptext">Для подтверждения введите, пожалуйста, пароль ещё раз.</span>
+		<div class="list-group-item list-group-item-action" style="border: none;">
+			<button type="submit" style="width:100%; border-style: none; border-width: 0ch;">
+				<div class="list-group-item list-group-item-action">
+					<h2>Sign Up</h2>
+				</div>
+			</button>
+		</div>
+				</form>
+					<!-- <button type="submit"><h2>Sign Up</h2></button> -->
+		</div>
+	<!-- </div> -->
+</div>
+{% endblock %}

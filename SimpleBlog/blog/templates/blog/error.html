@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}
+Error
+{% endblock %}
+
+{% block header %}
+	<li><a href="{% url 'index' %}" class="nav-link px-2 text-white">Home</a></li>
+	<li><a href="{% url 'blog' %}" class="nav-link px-2 text-white">Blog</a></li>
+	<li><a href="#" class="nav-link px-2 text-white">About</a></li>
+{% endblock %}
+
+{% block content %}
+<div class="list-group w-auto">
+	<h2 style="font-size: 5.5vw; text-align:center">Error</h2>
+	<h2 style="font-size: 3.5vw; text-align:center">Something went wrong</h2>
+</div>
+{% endblock %}

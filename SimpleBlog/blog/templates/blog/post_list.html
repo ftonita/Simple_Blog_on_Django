@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}
+Blog
+{% endblock %}
+
+{% block header %}
+    <li><a href="{% url 'index' %}" class="nav-link px-2 text-white">Home</a></li>
+    <li><a href="{% url 'blog' %}" class="nav-link px-2 text-secondary">Blog</a></li>
+    <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+<div class="list-group w-auto ">
+<details class="list-group-item list-group-item-action d-flex gap-3 py-3">
+		<summary>
+			<h2>Новый пост</h2>
+		</summary>
+		<form action="/blog/create_post/" onsubmit="return validateForm()" method="post" class="post-form" name="post_form">
+		{% csrf_token %}
+		<meta name="author"  value="{{ user.get_username }}"/>
+		<div class="list-group-item list-group-item-action d-flex gap-3 py-3">
+		<input type="text" name="title" placeholder="Тема" style="width: 100%" required></input>
+		</div>
+		<div class="list-group-item list-group-item-action d-flex gap-3 py-3">
+			<textarea name="content" cols="40" rows="5" placeholder="Текст" required></textarea>
+		</div>
+		<input name="author" id="author" value="{{ user.get_username }}" hidden/>
+		<input class="list-group-item list-group-item-action d-flex gap-3 py-3" type="submit" value="Отправить"></input>
+		</form>
+</details>
+</div>
+	{% else %}
+<div class="list-group w-auto ">
+	<h2>Вам нужно авторизоваться для того, чтобы оставить пост!</h2>
+		<div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="text-align:center; border-width: 10px; border-style: dashed;">
+			{% if form.errors %}
+			<p>Логин и(или) пароль неверные. Попробуйте еще раз</p>
+			{% endif %}
+
+			{% if next %}
+				{% if user.is_authenticated %}
+					<h2>У вас нет прав!</h2>
+				{% else %}
+					<h2>Вы должны быть авторизованы для отправки поста!</h2>
+				{% endif %}
+			{% endif %}
+
+			<form method="post" class="post-form" action="{% url 'login' %}">
+			{% csrf_token %}
+			<label for="id_username">Имя пользователя:</label>
+			<div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="border-width: 3px; border-style:groove;">
+				<input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+			</div>
+			<label for="id_password">Пароль:</label>
+			<div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="border-width: 3px; border-style:groove;">
+				<input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+			</div>
+			<!-- <input type="submit" value="Login"/> -->
+			<button style="border-radius: 5px; border-style:outset;" type="submit" value="login" class="list-group-item list-group-item-action d-flex gap-3 py-3"><h3>Login</h3></button>
+			<input type="hidden" name="next" value="{{ next }}" />
+			</form>
+
+			{# Assumes you setup the password_reset view in your URLconf #}
+		</div>
+		<div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="border:none">
+			<p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+			<p><a href="{% url 'signup'?next=/accounts/signup/ %}">Зарегистрироваться</a></p>
+		</div>
+</div>
+	{% endif %}
+
+<div class="list-group w-auto">
+    {% for post in object_list %}
+        <a href="{{ post.get_absolute_url }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+        <img src="https://static.thenounproject.com/png/2334497-200.png" alt="twbs" width="32" height="32" class="flex-shrink-0">
+        <div class="d-flex gap-1 w-200 justify-content-between">
+          <h6 class="mb-0">{{ post.title }}</h6>
+          <h6 class="mb-0 opacity-75" style="color:darkcyan">by {{ post.author }}</h6>
+        </div>
+        <small class="opacity-50">{{ post.datetime }}</small>
+      </a>
+    {% empty %}
+    <p>Нет постов</p>
+    {% endfor %}
+</div>
+{% endblock %}

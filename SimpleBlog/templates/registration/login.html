@@ -1,0 +1,47 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<div class="list-group w-auto ">
+  {% if user.is_authenticated %}
+  <h2>Вы уже авторизованы!</h2>
+    {% else %}
+    <h2>Авторизация</h2>
+      <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="text-align:center; border-width: 10px; border-style: dashed;">
+        {% if form.errors %}
+          <p>Логин и/или пароль неверные. Попробуйте еще раз</p>
+        {% else %}
+          {% if next %}
+          {% if user.is_authenticated %}
+          <p>Вы уже авторизованы!</p>
+          {% else %}
+          <p>Для авторизации введите имя пользователя и пароль</p>
+          {% endif %}
+          {% endif %}
+          
+        {% endif %}
+        <form method="post" class="post-form" action="{% url 'login' %}">
+        {% csrf_token %}
+        <label for="id_username">Имя пользователя:</label>
+        <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="border-width: 3px; border-style:groove;">
+          <input type="text" name="username" autofocus="" autocapitalize="none" autocomplete="username" maxlength="150" required="" id="id_username">
+        </div>
+        <label for="id_password">Пароль:</label>
+        <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="border-width: 3px; border-style:groove;">
+          <input type="password" name="password" autocomplete="current-password" required="" id="id_password">
+        </div>
+        <!-- <input type="submit" value="Login"/> -->
+        <button style="border-radius: 5px; border-style:outset;" type="submit" value="login" class="list-group-item list-group-item-action d-flex gap-3 py-3"><h3>Login</h3></button>
+        <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+  
+        {# Assumes you setup the password_reset view in your URLconf #}
+      </div>
+      <div class="list-group-item list-group-item-action d-flex gap-3 py-3" style="border:none">
+        <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+        <p><a href="{% url 'signup' %}">Зарегистрироваться</a></p>
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock %}

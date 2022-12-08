@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+Index page
+{% endblock %}
+
+{% block header %}
+  <li><a href="{% url 'index' %}" class="nav-link px-2 text-secondary">Home</a></li>
+  <li><a href="{% url 'blog' %}" class="nav-link px-2 text-white">Blog</a></li>
+  <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+{% endblock %}
+
+{% block content %}
+
+{% for news in object_list %}
+<div class="list-group w-auto">
+        <a href="{{ post.get_absolute_url }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+        <img src="https://static.thenounproject.com/png/2334497-200.png" alt="twbs" width="32" height="32" class="flex-shrink-0">
+        <!-- <div class="d-flex gap-1 w-200 justify-content-between"> -->
+          <div class="d-flex gap-2 w-100 justify-content-between">
+            <h6 class="mb-0 py-1">{{ news.title }}</h6>
+          </div>
+          <h6 class="mb-0 opacity-75" style="color:darkcyan">by {{ news.author }}</p>
+          <div class="list-group-item list-group-item-action d-flex gap-3 py-3">
+            {{ news.content }}
+          </div>
+        <small class="opacity-50">{{ news.datetime }}</small>
+      </a>
+    {% empty %}
+    <p>Нет постов</p>
+  </div>
+    {% endfor %}
+{% endblock %}
