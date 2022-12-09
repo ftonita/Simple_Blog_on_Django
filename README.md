@@ -1,5 +1,8 @@
 ## Simple Blog on Django
 
+### Demo:
+  ### + https://ftonita21.pythonanywhere.com
+
 ### Launch:
   
   *temp: you should have postgresql server, you can edit DB settings in settings.py
