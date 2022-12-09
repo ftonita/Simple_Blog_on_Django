@@ -78,12 +78,12 @@ WSGI_APPLICATION = 'SimpleBlog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'blog_db',
-        'USER': 'iskander',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ftonita21$blog_db',
+        'USER': 'ftonita21',
+        'PASSWORD': 'ParolyaNet123',
+        'HOST': 'ftonita21.mysql.pythonanywhere-services.com',
+        'PORT': '3306'
     }
 }
 
