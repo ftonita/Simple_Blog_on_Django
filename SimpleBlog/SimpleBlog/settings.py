@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9u$0=3kk(cm(p7o@j(dv7oazr@=ch5=@kh@!&#n_+3ff0d&ms*'
+SECRET_KEY = 'django-insecure-9u$0=3kk(csgfgfsgsfg(dv7oazr@=ch5=@kh@!&#n_+3ff0d&ms*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'SimpleBlog.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ftonita21$blog_db',
-        'USER': 'ftonita21',
-        'PASSWORD': 'ParolyaNet123',
-        'HOST': 'ftonita21.mysql.pythonanywhere-services.com',
+        'NAME': 'database_name',
+        'USER': 'username',
+        'PASSWORD': 'random_password',
+        'HOST': 'hostname',
         'PORT': '3306'
     }
 }
