@@ -15,4 +15,4 @@
   + python3 manage.py runserver
   
  ### Result
- - See `http://localhos:8000/`
+ - See `http://localhost:8000/`
